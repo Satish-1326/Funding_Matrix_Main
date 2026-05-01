@@ -242,4 +242,4 @@ copies or substantial portions of the Software.
 
 ---
 
-in this i want to write that every user need to their sql db not giving permission to use my
+User need to create their own database, i am now giving the password of my db due to confidential information...
