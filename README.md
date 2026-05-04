@@ -1,20 +1,24 @@
-# 🚀 Startup Funding Matrix (Advanced Analytics Dashboard)
+# 🚀 Startup Funding Matrix (Dockerized Advanced Analytics Dashboard)
 
 An advanced **Streamlit-based data analytics dashboard** designed to explore, analyze, and predict startup funding trends.
-This project integrates **data visualization, machine learning, geospatial analysis, and secure authentication** into a single platform.
+
+This project integrates:
+
+* 📊 Data Visualization
+* 🤖 Machine Learning
+* 🗺️ Geospatial Intelligence
+* 🔐 Secure Authentication
+* 🐳 **Dockerized Deployment (App + MySQL)**
 
 ---
 
 ## 📌 Project Overview
 
-The **Startup Funding Matrix** provides insights into startup ecosystems by analyzing funding data across sectors, cities, and investors.
+The **Startup Funding Matrix** provides deep insights into startup ecosystems by analyzing funding data across sectors, cities, and investors.
 
-It includes:
-
-* 📊 Interactive dashboards
-* 🤖 Machine Learning (Linear Regression + KNN)
-* 🗺️ Geospatial Intelligence (3D Map)
-* 🔐 Secure Authentication System (MySQL + bcrypt)
+It is now fully **containerized using Docker**, meaning:
+👉 No need to install Python, MySQL, or dependencies manually
+👉 Runs anywhere with a single command
 
 ---
 
@@ -27,44 +31,66 @@ It includes:
 * Investor portfolio analysis
 * Startup-level deep insights
 
+---
+
 ### 🤖 Machine Learning
 
 * **Linear Regression** → Funding prediction
 * **K-Nearest Neighbors (KNN)** → Similar startup recommendation
 
+---
+
 ### 🗺️ Geospatial Intelligence
 
-* 3D interactive map using PyDeck
+* 3D interactive maps using PyDeck
 * City-wise funding density visualization
+
+---
 
 ### 💡 Business Recommendation Engine
 
-* Suggests sectors based on:
+Suggests business sectors based on:
 
-  * Budget
-  * Market demand
-  * Growth trends
-  * Competition level
+* Budget
+* Market demand
+* Growth trends
+* Competition level
+
+---
 
 ### 🔐 Authentication System
 
-* Login & Signup pages
+* Secure Login & Signup
+* Password hashing using **bcrypt**
 * MySQL database integration
-* Password hashing using bcrypt
-* Session-based access control
+* Session-based authentication
+* Auto database table creation
+
+---
+
+## 🐳 Dockerized Architecture
+
+This project uses **Docker Compose** to run:
+
+* 🟢 **Streamlit App Container**
+* 🟢 **MySQL Database Container**
+
+👉 No need for local MySQL installation
+👉 Fully isolated environment
 
 ---
 
 ## 🛠️ Tech Stack
 
-| Category      | Technology     |
-| ------------- | -------------- |
-| Frontend      | Streamlit      |
-| Backend       | Python         |
-| Database      | MySQL          |
-| ML Libraries  | scikit-learn   |
-| Visualization | Plotly, PyDeck |
-| Security      | bcrypt         |
+| Category      | Technology             |
+| ------------- | ---------------------- |
+| Frontend      | Streamlit              |
+| Backend       | Python                 |
+| Database      | MySQL (Docker)         |
+| ML Libraries  | scikit-learn, XGBoost  |
+| Visualization | Plotly, PyDeck         |
+| Security      | bcrypt                 |
+| DevOps        | Docker, Docker Compose |
 
 ---
 
@@ -73,78 +99,69 @@ It includes:
 ```
 📁 Startup-Funding-Matrix
 │
-├── project1.py          # Main Streamlit App
-├── project.csv          # Dataset
-├── users.db / MySQL     # Authentication Database
-├── requirements.txt     # Dependencies
-└── README.md            # Project Documentation
+├── project1.py            # Main Streamlit App
+├── project.csv            # Dataset
+├── Dockerfile             # Docker Image Setup
+├── docker-compose.yml     # Multi-container setup
+├── requirements.txt       # Dependencies
+├── .env.example           # Environment variables template
+└── README.md              # Documentation
 ```
 
 ---
 
-## ⚙️ Installation & Setup
+## ⚙️ Run Using Docker (Recommended)
 
-### 1️⃣ Clone Repository
+### ✅ Prerequisites
+
+* Install Docker Desktop
+
+---
+
+### 🚀 Start the Application
 
 ```bash
-git clone https://github.com/your-username/startup-funding-matrix.git
-cd startup-funding-matrix
+docker compose up --build
 ```
 
 ---
 
-### 2️⃣ Install Dependencies
+### 🌐 Open in Browser
+
+```
+http://localhost:8501
+```
+
+---
+
+### 🛑 Stop Application
 
 ```bash
-pip install -r requirements.txt
-```
-
-Or manually:
-
-```bash
-pip install streamlit pandas numpy plotly pydeck scikit-learn mysql-connector-python bcrypt
+docker compose down
 ```
 
 ---
 
-### 3️⃣ Setup MySQL Database
+## 🔐 Environment Variables
 
-Run the following SQL commands:
+Create a `.env` file:
 
-```sql
-CREATE DATABASE auth_db;
-
-USE auth_db;
-
-CREATE TABLE users (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(255) UNIQUE,
-    password VARBINARY(255)
-);
+```env
+DB_HOST=db
+DB_USER=root
+DB_PASSWORD=root
+DB_NAME=auth_db
 ```
+
+⚠️ Do NOT share your real `.env` file publicly
 
 ---
 
-### 4️⃣ Configure Database Connection
+## 🗄️ Database Setup
 
-Update your code:
+No manual setup required ✅
 
-```python
-conn = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    password="your_password",
-    database="auth_db"
-)
-```
-
----
-
-### 5️⃣ Run the Application
-
-```bash
-streamlit run project1.py
-```
+👉 The app automatically creates the `users` table on startup
 
 ---
 
@@ -152,20 +169,21 @@ streamlit run project1.py
 
 1. User opens app
 2. Login / Signup page appears
-3. User registers → data stored in MySQL
-4. Login validates credentials (bcrypt hashing)
-5. Access granted to dashboard
-6. Logout returns to login page
+3. User registers → data stored in MySQL (Docker)
+4. Password securely hashed using bcrypt
+5. Login validates credentials
+6. Dashboard access granted
+7. Logout ends session
 
 ---
 
 ## 📊 Key Visualizations
 
-* 📈 Funding Trends (Line Charts)
-* 🏭 Sector Distribution (Bar Charts)
-* 🫧 Bubble Chart (Startup Comparison)
-* 🗺️ 3D City Funding Map
-* 📊 Investor Portfolio Pie Charts
+* 📈 Funding Trends
+* 🏭 Sector Distribution
+* 🫧 Startup Comparison (Bubble Chart)
+* 🗺️ 3D Funding Map
+* 📊 Investor Portfolio
 
 ---
 
@@ -173,15 +191,11 @@ streamlit run project1.py
 
 ### Linear Regression
 
-Used for:
-
-* Predicting future funding trends
+* Predicts funding trends
 
 ### KNN (K-Nearest Neighbors)
 
-Used for:
-
-* Finding similar startups based on:
+* Recommends similar startups based on:
 
   * Funding
   * Year
@@ -193,7 +207,7 @@ Used for:
 ## 🎯 Use Cases
 
 * Startup ecosystem analysis
-* Investment decision support
+* Investment insights
 * Business idea recommendation
 * Market trend prediction
 
@@ -201,19 +215,19 @@ Used for:
 
 ## ⚠️ Limitations
 
-* Uses static dataset (no real-time data)
-* Basic authentication (not production-ready)
-* Requires local MySQL setup
+* Uses static dataset
+* Authentication is basic (no OAuth yet)
+* No real-time data integration
 
 ---
 
 ## 🚀 Future Improvements
 
-* 🌐 Cloud deployment (AWS / Azure)
-* 🔑 OAuth login (Google, GitHub)
+* 🌐 Cloud deployment (AWS / Render / Azure)
+* 🔑 Google / GitHub OAuth login
 * 📧 Email OTP verification
-* 📊 Real-time data integration
-* 🤖 Advanced ML models (Random Forest, XGBoost)
+* 📊 Real-time data pipelines
+* 🤖 Advanced ML models
 
 ---
 
@@ -228,18 +242,16 @@ Used for:
 
 MIT License
 
-Copyright (c) 2026 Satish
+---
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+## 💡 Important Note
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+This project uses Docker for database and backend services.
+👉 Users do NOT need to install MySQL manually
+👉 Just run Docker and everything works
 
 ---
 
-User need to create their own database, i am not giving the password of my db due to confidential information...
+## ⭐ If You Like This Project
+
+Give it a ⭐ on GitHub and share it 🚀
