@@ -13,14 +13,25 @@ import plotly.graph_objects as go
 import mysql.connector
 import bcrypt
 
-conn = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    password="root",  # 🔁 CHANGE THIS
-    database="auth_db"
-)
 
-cursor = conn.cursor()
+# SQL CONNECTION
+from dotenv import load_dotenv
+import os
+import mysql.connector
+
+load_dotenv()
+
+def get_db_connection():
+    return mysql.connector.connect(
+        host=os.getenv("DB_HOST") or "127.0.0.1",
+        user=os.getenv("DB_USER") or "root",
+        password=os.getenv("DB_PASSWORD") or "root",
+        database=os.getenv("DB_NAME") or "auth_db",
+        port=3306,
+        auth_plugin='mysql_native_password'
+    )
+
+# cursor = conn.cursor()
 
 # ML fallback imports
 try:
@@ -188,7 +199,20 @@ def clean_amount_series(s):
 # ------------------------------
 # AUTH FUNCTIONS
 # ------------------------------
+import bcrypt
+import time
+
+# ------------------------------
+# 🔐 REGISTER USER
+# ------------------------------
 def create_user(username, password):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    # Password validation
+    if len(password) < 8:
+        return "Password must be at least 8 characters"
+
     hashed_pw = bcrypt.hashpw(password.encode(), bcrypt.gensalt())
 
     try:
@@ -198,37 +222,72 @@ def create_user(username, password):
         )
         conn.commit()
         return True
-    except:
-        return False
+    except mysql.connector.IntegrityError:
+        return "Username already exists"
+    finally:
+        cursor.close()
+        conn.close()
 
 
+# ------------------------------
+# 🔐 LOGIN USER
+# ------------------------------
 def login_user(username, password):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
     cursor.execute(
-        "SELECT password FROM users WHERE username = %s",
+        "SELECT id, password FROM users WHERE username = %s",
         (username,)
     )
-    result = cursor.fetchone()
+    user = cursor.fetchone()
 
-    if result:
-        stored_pw = result[0]
-        if bcrypt.checkpw(password.encode(), stored_pw):
-            return True
-    return False
+    cursor.close()
+    conn.close()
 
+    if user and bcrypt.checkpw(password.encode(), user[1]):
+        return {"id": user[0], "username": username}
+
+    return None
+
+
+# ------------------------------
+# 🔐 SESSION MANAGEMENT
+# ------------------------------
+SESSION_TIMEOUT = int(os.getenv("SESSION_TIMEOUT", 1800))  # 30 min
+
+def create_session(user):
+    st.session_state["user"] = user
+    st.session_state["login_time"] = time.time()
+
+def is_authenticated():
+    if "user" not in st.session_state:
+        return False
+
+    # Check session expiry
+    if time.time() - st.session_state.get("login_time", 0) > SESSION_TIMEOUT:
+        logout()
+        return False
+
+    return True
+
+def logout():
+    st.session_state.clear()
 
 # ------------------------------
 # LOGIN PAGE
 # ------------------------------
 def login_page():
-    st.title("🔐 Login")
+    st.title("🔐 Secure Login")
 
     username = st.text_input("Username")
     password = st.text_input("Password", type="password")
 
     if st.button("Login"):
-        if login_user(username, password):
-            st.session_state["logged_in"] = True
-            st.session_state["user"] = username
+        user = login_user(username, password)
+
+        if user:
+            create_session(user)
             st.success("Login successful")
             st.rerun()
         else:
@@ -239,16 +298,18 @@ def login_page():
 # SIGNUP PAGE
 # ------------------------------
 def signup_page():
-    st.title("📝 Sign Up")
+    st.title("📝 Register")
 
-    new_user = st.text_input("Create Username")
-    new_pass = st.text_input("Create Password", type="password")
+    username = st.text_input("Create Username")
+    password = st.text_input("Create Password", type="password")
 
     if st.button("Register"):
-        if create_user(new_user, new_pass):
+        result = create_user(username, password)
+
+        if result is True:
             st.success("Account created successfully")
         else:
-            st.error("Username already exists")
+            st.error(result)
 
 
 def df_to_csv_bytes(df):
@@ -367,11 +428,7 @@ working_df = st.session_state["working_df"]
 # ------------------------------
 # SESSION CONTROL
 # ------------------------------
-if "logged_in" not in st.session_state:
-    st.session_state["logged_in"] = False
-
-# Show login/signup if not logged in
-if not st.session_state["logged_in"]:
+if not is_authenticated():
     menu = st.sidebar.selectbox("Menu", ["Login", "Sign Up"])
 
     if menu == "Login":
@@ -592,11 +649,13 @@ page_color = color_for_page(st.session_state.get('page', "Overview"))
 st.sidebar.markdown(f"<h1 style='color:{page_color};'>FUNDING MATRIX</h1>",
                     unsafe_allow_html=True)
 
-st.sidebar.write(f"👤 Logged in as: {st.session_state['user']}")
+
+st.sidebar.write(f"👤 Logged in as: {st.session_state['user']['username']}")
+
+
 
 if st.sidebar.button("Logout"):
-    st.session_state["logged_in"] = False
-    st.session_state["user"] = None
+    logout()
     st.rerun()
 
 if 'page' not in st.session_state:
