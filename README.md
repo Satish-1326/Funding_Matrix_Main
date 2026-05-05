@@ -149,7 +149,7 @@ Create a `.env` file:
 ```env
 DB_HOST=db
 DB_USER=root
-DB_PASSWORD=root
+DB_PASSWORD=your_db_pass
 DB_NAME=auth_db
 ```
 
