@@ -146,18 +146,20 @@ Kubernetes Components Used:
 
 ---
 
-### 🚀 Start the Application
+### 🚀 1️⃣ Clone Repository
 
 ```bash
-docker compose up --build
+git clone https://github.com/your-username/startup-funding-matrix.git
+cd startup-funding-matrix
 ```
 
 ---
 
-### 🌐 Open in Browser
-
+### 2️⃣ Create Virtual Environment
+Windows
 ```
-http://localhost:8501
+python -m venv .venv
+.venv\Scripts\activate
 ```
 
 ---
