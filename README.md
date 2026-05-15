@@ -83,6 +83,27 @@ This project uses **Docker Compose** to run:
 
 ---
 
+---
+
+# ☸️ Kubernetes Integration
+
+Kubernetes is used for:
+
+* Container orchestration
+* Replica management
+* Auto scaling
+* Load balancing
+* Self-healing deployments
+
+Kubernetes Components Used:
+
+* Deployment
+* Service
+* Pods
+* ReplicaSets
+
+---
+
 ## 🛠️ Tech Stack
 
 | Category      | Technology             |
