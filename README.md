@@ -220,7 +220,16 @@ CREATE TABLE users (
 ```
 ---
 
-👉 The app automatically creates the `users` table on startup
+## Configure Database Connection
+
+```bash
+conn = mysql.connector.connect(
+    host="localhost",
+    user="root",
+    password="your_password",
+    database="auth_db"
+)
+```
 
 ---
 
