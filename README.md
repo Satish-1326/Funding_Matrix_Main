@@ -8,7 +8,7 @@ This project integrates:
 * 🤖 Machine Learning
 * 🗺️ Geospatial Intelligence
 * 🔐 Secure Authentication
-* 🐳 Dockerized Deployment
+* 🐳 Dockerized Deploymentz
 * ☸️ Kubernetes Orchestration
 
 ---
@@ -157,3 +157,115 @@ Kubernetes Components Used:
 ├── requirements.txt         # Dependencies
 ├── .env.example             # Environment Variables
 └── README.md                # Documentation
+
+⚙️ Local Installation
+1️⃣ Clone Repository
+git clone https://github.com/your-username/startup-funding-matrix.git
+cd startup-funding-matrix
+2️⃣ Create Virtual Environment
+Windows
+python -m venv .venv
+.venv\Scripts\activate
+Linux / Mac
+python3 -m venv .venv
+source .venv/bin/activate
+3️⃣ Install Dependencies
+pip install -r requirements.txt
+🗄️ MySQL Database Setup
+
+Run the following SQL commands:
+
+CREATE DATABASE auth_db;
+
+USE auth_db;
+
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(255) UNIQUE,
+    password VARBINARY(255)
+);
+Configure Database Connection
+
+Update database credentials in your Python file:
+
+conn = mysql.connector.connect(
+    host="localhost",
+    user="root",
+    password="your_password",
+    database="auth_db"
+)
+🚀 Run Project Locally
+streamlit run project1.py
+
+Open in browser:
+
+http://localhost:8501
+🐳 Docker Setup
+Build Docker Image
+docker build -t startup-funding-app .
+Run Docker Container
+docker run -p 8501:8501 startup-funding-app
+View Running Containers
+docker ps
+Stop Docker Container
+docker stop <container_id>
+
+Example:
+
+docker stop a1b2c3d4
+Start Container Again
+docker start <container_id>
+Remove Docker Container
+docker rm <container_id>
+View Docker Images
+docker images
+🐳 Docker Compose Setup
+Start Application
+docker compose up --build
+Stop Application
+docker compose down
+☸️ Kubernetes Setup
+Enable Kubernetes
+
+Open Docker Desktop:
+
+Settings
+Kubernetes
+Enable Kubernetes
+Apply & Restart
+Verify Kubernetes
+kubectl get nodes
+Deploy Application
+kubectl apply -f deployment.yaml
+kubectl apply -f service.yaml
+Check Running Pods
+kubectl get pods
+Check Services
+kubectl get services
+Access Application
+kubectl port-forward service/startup-funding-service 8501:80
+
+Open in browser:
+
+http://localhost:8501
+🔄 Kubernetes Scaling
+Scale to 5 Replicas
+kubectl scale deployment startup-funding-deployment --replicas=5
+Stop Application Pods
+kubectl scale deployment startup-funding-deployment --replicas=0
+Restart Application Pods
+kubectl scale deployment startup-funding-deployment --replicas=2
+🛑 Stop Kubernetes Deployment
+kubectl delete -f deployment.yaml
+kubectl delete -f service.yaml
+📊 Useful Kubernetes Commands
+View Pods
+kubectl get pods
+View Services
+kubectl get services
+View Deployments
+kubectl get deployments
+View Logs
+kubectl logs <pod-name>
+Restart Deployment
+kubectl rollout restart deployment startup-funding-deployment
