@@ -233,6 +233,11 @@ Build Docker Image
 ```bash
 docker build -t startup-funding-app .
 ```
+
+Run Docker Container
+```bash
+docker run -p 8501:8501 startup-funding-app
+```
 ---
 
 ## 🔐 Authentication Flow
