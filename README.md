@@ -8,7 +8,8 @@ This project integrates:
 * 🤖 Machine Learning
 * 🗺️ Geospatial Intelligence
 * 🔐 Secure Authentication
-* 🐳 **Dockerized Deployment (App + MySQL)**
+* 🐳 Dockerized Deployment (App + MySQL)
+* ☸️ Kubernetes Orchestration
 
 ---
 
