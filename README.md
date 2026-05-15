@@ -104,17 +104,19 @@ Kubernetes Components Used:
 
 ---
 
-## 🛠️ Tech Stack
+# 🛠️ Tech Stack
 
-| Category      | Technology             |
-| ------------- | ---------------------- |
-| Frontend      | Streamlit              |
-| Backend       | Python                 |
-| Database      | MySQL (Docker)         |
-| ML Libraries  | scikit-learn, XGBoost  |
-| Visualization | Plotly, PyDeck         |
-| Security      | bcrypt                 |
-| DevOps        | Docker, Docker Compose |
+| Category | Technology |
+|---|---|
+| Frontend | Streamlit |
+| Backend | Python |
+| Database | MySQL |
+| Machine Learning | scikit-learn |
+| Visualization | Plotly, PyDeck |
+| Security | bcrypt |
+| Containerization | Docker |
+| Orchestration | Kubernetes |
+
 
 ---
 
