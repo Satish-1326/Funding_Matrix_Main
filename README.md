@@ -262,7 +262,7 @@ docker rm <container_id>
 View Docker Images
 ```bash
 docker images
-``
+```
 ---
 
 ## 🔐 Authentication Flow
