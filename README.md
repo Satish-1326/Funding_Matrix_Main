@@ -143,6 +143,19 @@ Kubernetes Components Used:
 
 ---
 
+## ⚙️ Local Installation
+
+### 1️⃣ Clone the Repository
+```bash
+git clone [https://github.com/your-username/startup-funding-matrix.git](https://github.com/your-username/startup-funding-matrix.git)
+cd startup-funding-matrix
+View Deployments
+kubectl get deployments
+View Logs
+kubectl logs <pod-name>
+Restart Deployment
+kubectl rollout restart deployment startup-funding-deployment
+
 # 📂 Project Structure
 
 ```text
@@ -158,15 +171,3 @@ Kubernetes Components Used:
 ├── .env.example             # Environment Variables
 └── README.md                # Documentation
 
-## ⚙️ Local Installation
-
-### 1️⃣ Clone the Repository
-```bash
-git clone [https://github.com/your-username/startup-funding-matrix.git](https://github.com/your-username/startup-funding-matrix.git)
-cd startup-funding-matrix
-View Deployments
-kubectl get deployments
-View Logs
-kubectl logs <pod-name>
-Restart Deployment
-kubectl rollout restart deployment startup-funding-deployment
