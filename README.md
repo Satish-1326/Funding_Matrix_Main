@@ -203,7 +203,22 @@ DB_NAME=auth_db
 
 ## 🗄️ Database Setup
 
-No manual setup required ✅
+No manual setup required ✅ OR
+
+---
+
+```bash
+CREATE DATABASE auth_db;
+
+USE auth_db;
+
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(255) UNIQUE,
+    password VARBINARY(255)
+);
+```
+---
 
 👉 The app automatically creates the `users` table on startup
 
