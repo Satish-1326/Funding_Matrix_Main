@@ -18,6 +18,7 @@ This project integrates:
 The **Startup Funding Matrix** provides deep insights into startup ecosystems by analyzing funding data across sectors, cities, and investors.
 
 It is now fully **containerized using Docker**, meaning:
+The project is fully containerized using Docker and orchestrated using Kubernetes, making it scalable and production-ready.
 👉 No need to install Python, MySQL, or dependencies manually
 👉 Runs anywhere with a single command
 
