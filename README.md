@@ -238,6 +238,31 @@ Run Docker Container
 ```bash
 docker run -p 8501:8501 startup-funding-app
 ```
+
+View Running Containers
+```bash
+docker ps
+```
+
+Stop Docker Container
+```bash
+docker stop <container_id>
+```
+
+Start Container Again
+```bash
+docker start <container_id>
+```
+
+Remove Docker Container
+```bash
+docker rm <container_id>
+```
+
+View Docker Images
+```bash
+docker images
+``
 ---
 
 ## 🔐 Authentication Flow
