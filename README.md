@@ -226,10 +226,10 @@ conn = mysql.connector.connect(
 
 ---
 
+---
 ### 🐳 Docker Setup
 Build Docker Image
 
----
 ```bash
 docker build -t startup-funding-app .
 ```
