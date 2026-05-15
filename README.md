@@ -125,13 +125,15 @@ Kubernetes Components Used:
 ```
 📁 Startup-Funding-Matrix
 │
-├── project1.py            # Main Streamlit App
-├── project.csv            # Dataset
-├── Dockerfile             # Docker Image Setup
-├── docker-compose.yml     # Multi-container setup
-├── requirements.txt       # Dependencies
-├── .env.example           # Environment variables template
-└── README.md              # Documentation
+├── project1.py              # Main Streamlit Application
+├── project.csv              # Dataset
+├── Dockerfile               # Docker Configuration
+├── docker-compose.yml       # Multi-container Docker Setup
+├── deployment.yaml          # Kubernetes Deployment
+├── service.yaml             # Kubernetes Service
+├── requirements.txt         # Dependencies
+├── .env.example             # Environment Variables
+└── README.md                # Documentation
 ```
 
 ---
