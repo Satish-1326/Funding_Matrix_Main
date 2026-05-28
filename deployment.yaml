@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: startup-funding-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: startup-funding-app
+
+  template:
+    metadata:
+      labels:
+        app: startup-funding-app
+
+    spec:
+      containers:
+        - name: startup-funding-container
+          image: startup-funding-app
+          imagePullPolicy: Never
+
+          ports:
+            - containerPort: 8501
