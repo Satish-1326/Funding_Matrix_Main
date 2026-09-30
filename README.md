@@ -10,7 +10,7 @@ This project integrates:
 * 🔐 Secure Authentication
 * 🐳 Dockerized Deployment (App + MySQL)
 * ☸️ Kubernetes Orchestration
-
+  
 ---
 
 ## 📌 Project Overview
