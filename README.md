@@ -13,6 +13,7 @@ This project integrates:
   
 ---
 
+
 ## 📌 Project Overview
 
 *Startup Funding Matrix** provides deep insights into startup ecosystems by analyzing funding data across sectors, cities, investors, and funding patterns.
